@@ -15,7 +15,7 @@ jobs:
       matrix:
         #node-version: [12, 14, 16]
         node-verson: [12]  
-        #os: [ubuntu-latest, windows-latest, macos-latest]
+        #os: [ubuntu-latest, windows-latest]
         os: [ windows-latest ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -36,14 +36,11 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest' }} 
       run: zip release.zip ./* -r
 
-    - name: Agent MacOs Zip
-      if: ${{ matrix.os == 'macos-latest' }} 
-      run: zip release.zip ./* -r
-
+    
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
         # Artifact name
         name: artifact
         # A file, directory or wildcard pattern that describes what to upload
-        path: release.zip
+        path: release.zip .
